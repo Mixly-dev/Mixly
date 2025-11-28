@@ -5,6 +5,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
+import { PlaylistModule } from './playlist/playlist.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { AuthModule } from './auth/auth.module';
       inject: [ConfigService],
     }),
     AuthModule,
+    PlaylistModule,
   ],
 })
 export class AppModule {}

@@ -68,13 +68,13 @@
     - 토큰 저장 (SecureStore)
     - _Requirements: 1.5_
 
-- [ ] 6. Checkpoint - 인증 시스템 테스트
+- [x] 6. Checkpoint - 인증 시스템 테스트
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 3: 플레이리스트 관리
 
-- [ ] 7. 플레이리스트 모듈 구현 (Backend)
-  - [ ] 7.1 Playlist 서비스 CRUD 구현
+- [x] 7. 플레이리스트 모듈 구현 (Backend)
+  - [x] 7.1 Playlist 서비스 CRUD 구현
     - create, update, delete 메서드
     - getById, getByUser 메서드
     - _Requirements: 2.1, 2.5, 2.6_
@@ -87,7 +87,7 @@
   - [ ]* 7.4 Property test: 메타데이터 업데이트 지속성
     - **Property 7: Playlist Metadata Update Persistence**
     - **Validates: Requirements 2.6**
-  - [ ] 7.5 트랙 관리 기능 구현
+  - [x] 7.5 트랙 관리 기능 구현
     - addTrack, removeTrack 메서드
     - reorderTracks 메서드
     - _Requirements: 2.2, 2.3, 2.4_
@@ -97,14 +97,14 @@
   - [ ]* 7.7 Property test: 트랙 순서 지속성
     - **Property 5: Track Reorder Persistence**
     - **Validates: Requirements 2.4**
-  - [ ] 7.8 공유 링크 기능 구현
+  - [x] 7.8 공유 링크 기능 구현
     - generateShareLink 메서드
     - getByShareCode 메서드
     - _Requirements: 3.3, 3.4_
   - [ ]* 7.9 Property test: 공유 링크 고유성 및 접근
     - **Property 9: Share Link Uniqueness and Access**
     - **Validates: Requirements 3.3, 3.4**
-  - [ ] 7.10 가시성 접근 제어 구현
+  - [x] 7.10 가시성 접근 제어 구현
     - 공개/비공개 접근 로직
     - _Requirements: 3.1, 3.2_
   - [ ]* 7.11 Property test: 가시성 접근 제어

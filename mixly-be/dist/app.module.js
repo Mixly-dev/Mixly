@@ -14,6 +14,7 @@ const apollo_1 = require("@nestjs/apollo");
 const typeorm_1 = require("@nestjs/typeorm");
 const path_1 = require("path");
 const auth_module_1 = require("./auth/auth.module");
+const playlist_module_1 = require("./playlist/playlist.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -45,6 +46,7 @@ exports.AppModule = AppModule = __decorate([
                 inject: [config_1.ConfigService],
             }),
             auth_module_1.AuthModule,
+            playlist_module_1.PlaylistModule,
         ],
     })
 ], AppModule);
