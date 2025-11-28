@@ -119,4 +119,21 @@ export class PlaylistResolver {
         position: index + 1,
       }));
   }
+
+  @ResolveField(() => Number)
+  trackCount(@Parent() playlist: Playlist): number {
+    return playlist.playlistTracks?.length || 0;
+  }
+
+  @ResolveField(() => Number)
+  likeCount(@Parent() playlist: Playlist): number {
+    // TODO: Implement like count from database
+    return 0;
+  }
+
+  @ResolveField(() => Boolean)
+  isLiked(@Parent() playlist: Playlist, @CurrentUser() user?: User): boolean {
+    // TODO: Implement like status check
+    return false;
+  }
 }

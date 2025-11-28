@@ -2,3 +2,6 @@ mixly/node_modules
 mixly/.DS_Store
 mixly-be/node_modules
 node_modules
+mixly-be/dist
+mixly/.expo/static-tmp
+mixly/.expo/web/cache

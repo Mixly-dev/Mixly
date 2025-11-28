@@ -24,7 +24,8 @@ export class PlaylistService {
       ownerId: userId,
       visibility: input.visibility || PlaylistVisibility.PRIVATE,
     });
-    return this.playlistRepository.save(playlist);
+    const saved = await this.playlistRepository.save(playlist);
+    return this.findByIdOrFail(saved.id);
   }
 
   async update(playlistId: string, userId: string, input: UpdatePlaylistInput): Promise<Playlist> {
@@ -75,6 +76,8 @@ export class PlaylistService {
     const queryBuilder = this.playlistRepository
       .createQueryBuilder('playlist')
       .leftJoinAndSelect('playlist.owner', 'owner')
+      .leftJoinAndSelect('playlist.playlistTracks', 'playlistTracks')
+      .leftJoinAndSelect('playlistTracks.track', 'track')
       .where('playlist.ownerId = :userId', { userId });
 
     if (requesterId !== userId) {
