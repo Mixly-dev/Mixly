@@ -1,0 +1,4 @@
+@apollo/protobufjs
+@nestjs/core
+bcrypt
+unrs-resolver

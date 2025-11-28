@@ -40,7 +40,7 @@
 
 ## Phase 2: 인증 시스템
 
-- [x] 4. 인증 모듈 구현 (Backend)
+- [ ] 4. 인증 모듈 구현 (Backend)
   - [x] 4.1 Auth 모듈 및 서비스 생성
     - JWT 토큰 생성/검증 로직
     - 비밀번호 해싱 (bcrypt)
@@ -58,12 +58,12 @@
     - **Validates: Requirements 1.3**
 
 - [ ] 5. 인증 UI 구현 (Frontend)
-  - [ ] 5.1 로그인/회원가입 화면 구현
+  - [x] 5.1 로그인/회원가입 화면 구현
     - app/(auth)/login.tsx 생성
     - app/(auth)/register.tsx 생성
     - NativeWind 스타일링
     - _Requirements: 1.1, 1.2_
-  - [ ] 5.2 인증 상태 관리 훅 구현
+  - [x] 5.2 인증 상태 관리 훅 구현
     - useAuth 훅 생성
     - 토큰 저장 (SecureStore)
     - _Requirements: 1.5_
