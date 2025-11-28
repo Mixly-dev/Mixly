@@ -164,13 +164,13 @@
     - PlaylistCard에 좋아요 기능 추가
     - _Requirements: 4.3, 4.4_
 
-- [ ] 12. Checkpoint - 소셜 기능 테스트
+- [x] 12. Checkpoint - 소셜 기능 테스트
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 5: 검색 및 탐색
 
 - [ ] 13. 검색 모듈 구현 (Backend)
-  - [ ] 13.1 검색 기능 구현
+  - [x] 13.1 검색 기능 구현
     - search 메서드 (키워드 기반)
     - 필터링 로직
     - _Requirements: 5.1, 5.3_
@@ -180,13 +180,13 @@
   - [ ]* 13.3 Property test: 검색 필터 정확성
     - **Property 15: Search Filter Correctness**
     - **Validates: Requirements 5.3**
-  - [ ] 13.4 트렌딩 기능 구현
+  - [x] 13.4 트렌딩 기능 구현
     - getTrending 메서드
     - _Requirements: 5.2_
   - [ ]* 13.5 Property test: 트렌딩 정렬
     - **Property 14: Trending Order**
     - **Validates: Requirements 5.2**
-  - [ ] 13.6 페이지네이션 구현
+  - [x] 13.6 페이지네이션 구현
     - 커서 기반 페이지네이션
     - _Requirements: 5.4_
   - [ ]* 13.7 Property test: 페이지네이션 일관성

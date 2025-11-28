@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { PlaylistModule } from './playlist/playlist.module';
 import { SocialModule } from './social/social.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { SocialModule } from './social/social.module';
     AuthModule,
     PlaylistModule,
     SocialModule,
+    SearchModule,
   ],
 })
 export class AppModule {}

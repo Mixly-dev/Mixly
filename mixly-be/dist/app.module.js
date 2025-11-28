@@ -16,6 +16,7 @@ const path_1 = require("path");
 const auth_module_1 = require("./auth/auth.module");
 const playlist_module_1 = require("./playlist/playlist.module");
 const social_module_1 = require("./social/social.module");
+const search_module_1 = require("./search/search.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -49,6 +50,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             playlist_module_1.PlaylistModule,
             social_module_1.SocialModule,
+            search_module_1.SearchModule,
         ],
     })
 ], AppModule);
