@@ -205,13 +205,13 @@
     - 장르/카테고리 필터
     - _Requirements: 5.3_
 
-- [ ] 15. Checkpoint - 검색 기능 테스트
+- [x] 15. Checkpoint - 검색 기능 테스트
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 6: 에러 처리 및 검증
 
-- [ ] 16. 에러 처리 강화
-  - [ ] 16.1 GraphQL 에러 필터 구현
+- [x] 16. 에러 처리 강화
+  - [x] 16.1 GraphQL 에러 필터 구현
     - 커스텀 예외 클래스 생성
     - 에러 응답 포맷팅
     - _Requirements: 6.4_
