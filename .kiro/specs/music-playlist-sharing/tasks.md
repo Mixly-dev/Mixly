@@ -17,13 +17,13 @@
     - **Property 17: GraphQL Serialization Round-Trip**
     - **Validates: Requirements 6.1, 6.2, 6.3**
 
-- [ ] 2. Backend (NestJS) 프로젝트 초기화
-  - [ ] 2.1 mixly-be 폴더에 NestJS 프로젝트 생성
+- [x] 2. Backend (NestJS) 프로젝트 초기화
+  - [x] 2.1 mixly-be 폴더에 NestJS 프로젝트 생성
     - NestJS CLI로 프로젝트 생성
     - GraphQL 모듈 설정 (@nestjs/graphql, @nestjs/apollo)
     - TypeORM 및 PostgreSQL 연결 설정
     - _Requirements: 7.1_
-  - [ ] 2.2 데이터베이스 엔티티 생성
+  - [x] 2.2 데이터베이스 엔티티 생성
     - User, Playlist, Track, PlaylistTrack, Follow, Like 엔티티
     - TypeORM 마이그레이션 설정
     - _Requirements: 2.1, 4.1, 4.3_
