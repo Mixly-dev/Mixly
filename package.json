@@ -8,9 +8,12 @@
     "dev:app": "pnpm --filter mixly run start",
     "build": "moon run :build",
     "test": "moon run :test",
-    "lint": "moon run :lint"
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
     "concurrently": "^8.2.2"
   }
 }
