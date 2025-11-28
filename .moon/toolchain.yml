@@ -6,9 +6,9 @@ $schema: 'https://moonrepo.dev/schemas/toolchain.json'
 # Node.js configuration
 node:
   version: '20.10.0'
-  packageManager: 'npm'
-  npm:
-    version: '10.2.3'
+  packageManager: 'pnpm'
+  pnpm:
+    version: '8.15.0'
 
 # TypeScript configuration
 typescript:

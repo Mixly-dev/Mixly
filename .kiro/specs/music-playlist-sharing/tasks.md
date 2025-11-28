@@ -28,7 +28,7 @@
     - TypeORM 마이그레이션 설정
     - _Requirements: 2.1, 4.1, 4.3_
 
-- [ ] 3. Frontend (Expo) 프로젝트 설정
+- [-] 3. Frontend (Expo) 프로젝트 설정
   - [ ] 3.1 mixly 폴더에 NativeWind 설정
     - tailwind.config.js 생성
     - NativeWind 플러그인 설정
