@@ -1,6 +1,7 @@
 import { InputType, Field, ObjectType, Int, ID } from '@nestjs/graphql';
 import { IsString, IsOptional, IsEnum, MaxLength, Min } from 'class-validator';
 import { PlaylistVisibility, Playlist } from '../../entities/playlist.entity';
+import { PageInfo } from '../../common/dto/pagination.dto';
 
 @InputType()
 export class CreatePlaylistInput {
@@ -95,21 +96,6 @@ export class PaginationInput {
   @Field({ nullable: true })
   @IsOptional()
   after?: string;
-}
-
-@ObjectType()
-export class PageInfo {
-  @Field()
-  hasNextPage: boolean;
-
-  @Field()
-  hasPreviousPage: boolean;
-
-  @Field({ nullable: true })
-  startCursor?: string;
-
-  @Field({ nullable: true })
-  endCursor?: string;
 }
 
 @ObjectType()

@@ -1,4 +1,5 @@
 import { PlaylistVisibility, Playlist } from '../../entities/playlist.entity';
+import { PageInfo } from '../../common/dto/pagination.dto';
 export declare class CreatePlaylistInput {
     title: string;
     description?: string;
@@ -23,12 +24,6 @@ export declare class TrackInput {
 export declare class PaginationInput {
     first?: number;
     after?: string;
-}
-export declare class PageInfo {
-    hasNextPage: boolean;
-    hasPreviousPage: boolean;
-    startCursor?: string;
-    endCursor?: string;
 }
 export declare class PlaylistEdge {
     node: Playlist;

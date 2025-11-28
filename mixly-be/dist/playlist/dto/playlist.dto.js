@@ -9,10 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PlaylistConnection = exports.PlaylistEdge = exports.PageInfo = exports.PaginationInput = exports.TrackInput = exports.UpdatePlaylistInput = exports.CreatePlaylistInput = void 0;
+exports.PlaylistConnection = exports.PlaylistEdge = exports.PaginationInput = exports.TrackInput = exports.UpdatePlaylistInput = exports.CreatePlaylistInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const class_validator_1 = require("class-validator");
 const playlist_entity_1 = require("../../entities/playlist.entity");
+const pagination_dto_1 = require("../../common/dto/pagination.dto");
 let CreatePlaylistInput = class CreatePlaylistInput {
 };
 exports.CreatePlaylistInput = CreatePlaylistInput;
@@ -137,28 +138,6 @@ __decorate([
 exports.PaginationInput = PaginationInput = __decorate([
     (0, graphql_1.InputType)()
 ], PaginationInput);
-let PageInfo = class PageInfo {
-};
-exports.PageInfo = PageInfo;
-__decorate([
-    (0, graphql_1.Field)(),
-    __metadata("design:type", Boolean)
-], PageInfo.prototype, "hasNextPage", void 0);
-__decorate([
-    (0, graphql_1.Field)(),
-    __metadata("design:type", Boolean)
-], PageInfo.prototype, "hasPreviousPage", void 0);
-__decorate([
-    (0, graphql_1.Field)({ nullable: true }),
-    __metadata("design:type", String)
-], PageInfo.prototype, "startCursor", void 0);
-__decorate([
-    (0, graphql_1.Field)({ nullable: true }),
-    __metadata("design:type", String)
-], PageInfo.prototype, "endCursor", void 0);
-exports.PageInfo = PageInfo = __decorate([
-    (0, graphql_1.ObjectType)()
-], PageInfo);
 let PlaylistEdge = class PlaylistEdge {
 };
 exports.PlaylistEdge = PlaylistEdge;
@@ -181,8 +160,8 @@ __decorate([
     __metadata("design:type", Array)
 ], PlaylistConnection.prototype, "edges", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => PageInfo),
-    __metadata("design:type", PageInfo)
+    (0, graphql_1.Field)(() => pagination_dto_1.PageInfo),
+    __metadata("design:type", pagination_dto_1.PageInfo)
 ], PlaylistConnection.prototype, "pageInfo", void 0);
 __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),

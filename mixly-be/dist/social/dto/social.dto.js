@@ -9,9 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserConnection = exports.PageInfo = exports.UserEdge = void 0;
+exports.UserConnection = exports.UserEdge = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const user_entity_1 = require("../../entities/user.entity");
+const pagination_dto_1 = require("../../common/dto/pagination.dto");
 let UserEdge = class UserEdge {
 };
 exports.UserEdge = UserEdge;
@@ -26,28 +27,6 @@ __decorate([
 exports.UserEdge = UserEdge = __decorate([
     (0, graphql_1.ObjectType)()
 ], UserEdge);
-let PageInfo = class PageInfo {
-};
-exports.PageInfo = PageInfo;
-__decorate([
-    (0, graphql_1.Field)(),
-    __metadata("design:type", Boolean)
-], PageInfo.prototype, "hasNextPage", void 0);
-__decorate([
-    (0, graphql_1.Field)(),
-    __metadata("design:type", Boolean)
-], PageInfo.prototype, "hasPreviousPage", void 0);
-__decorate([
-    (0, graphql_1.Field)({ nullable: true }),
-    __metadata("design:type", String)
-], PageInfo.prototype, "startCursor", void 0);
-__decorate([
-    (0, graphql_1.Field)({ nullable: true }),
-    __metadata("design:type", String)
-], PageInfo.prototype, "endCursor", void 0);
-exports.PageInfo = PageInfo = __decorate([
-    (0, graphql_1.ObjectType)()
-], PageInfo);
 let UserConnection = class UserConnection {
 };
 exports.UserConnection = UserConnection;
@@ -56,8 +35,8 @@ __decorate([
     __metadata("design:type", Array)
 ], UserConnection.prototype, "edges", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => PageInfo),
-    __metadata("design:type", PageInfo)
+    (0, graphql_1.Field)(() => pagination_dto_1.PageInfo),
+    __metadata("design:type", pagination_dto_1.PageInfo)
 ], UserConnection.prototype, "pageInfo", void 0);
 __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),

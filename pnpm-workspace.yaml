@@ -1,4 +1,7 @@
 packages:
-  - 'mixly'
-  - 'mixly-be'
-  - 'shared'
+  - mixly
+  - mixly-be
+  - shared
+
+ignoredBuiltDependencies:
+  - bcrypt

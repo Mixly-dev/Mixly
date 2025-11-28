@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { User } from '../../entities/user.entity';
+import { PageInfo } from '../../common/dto/pagination.dto';
 
 @ObjectType()
 export class UserEdge {
@@ -8,21 +9,6 @@ export class UserEdge {
 
   @Field()
   cursor: string;
-}
-
-@ObjectType()
-export class PageInfo {
-  @Field()
-  hasNextPage: boolean;
-
-  @Field()
-  hasPreviousPage: boolean;
-
-  @Field({ nullable: true })
-  startCursor?: string;
-
-  @Field({ nullable: true })
-  endCursor?: string;
 }
 
 @ObjectType()

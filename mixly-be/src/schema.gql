@@ -1,0 +1,176 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPayload {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+input CreatePlaylistInput {
+  description: String
+  genre: String
+  title: String!
+  visibility: PlaylistVisibility
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  addTrackToPlaylist(playlistId: ID!, track: TrackInput!): Playlist!
+  createPlaylist(input: CreatePlaylistInput!): Playlist!
+  deletePlaylist(id: ID!): Boolean!
+  follow(userId: ID!): Boolean!
+  generatePlaylistShareLink(playlistId: ID!): String!
+  likePlaylist(playlistId: ID!): Boolean!
+  login(input: LoginInput!): AuthPayload!
+  refreshToken(refreshToken: String!): AuthPayload!
+  register(input: RegisterInput!): AuthPayload!
+  removeTrackFromPlaylist(playlistId: ID!, trackId: ID!): Playlist!
+  reorderPlaylistTracks(playlistId: ID!, trackIds: [ID!]!): Playlist!
+  unfollow(userId: ID!): Boolean!
+  unlikePlaylist(playlistId: ID!): Boolean!
+  updatePlaylist(id: ID!, input: UpdatePlaylistInput!): Playlist!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+input PaginationInput {
+  after: String
+  first: Int = 20
+}
+
+type Playlist {
+  coverImageUrl: String
+  createdAt: DateTime!
+  description: String
+  genre: String
+  id: ID!
+  isLiked: Boolean!
+  likeCount: Int!
+  owner: User!
+  shareCode: String
+  title: String!
+  trackCount: Int!
+  tracks: [Track!]!
+  updatedAt: DateTime!
+  visibility: PlaylistVisibility!
+}
+
+type PlaylistConnection {
+  edges: [PlaylistEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PlaylistEdge {
+  cursor: String!
+  node: Playlist!
+}
+
+enum PlaylistVisibility {
+  PRIVATE
+  PUBLIC
+}
+
+type Query {
+  feed(pagination: PaginationInput): PlaylistConnection!
+  me: User
+  myPlaylists(pagination: PaginationInput): PlaylistConnection!
+  playlist(id: ID!): Playlist
+  playlistByShareCode(shareCode: String!): Playlist
+  search(filters: SearchFilters, pagination: PaginationInput, query: String!): SearchResult!
+  trending(pagination: PaginationInput, timeRange: TimeRange = WEEK): PlaylistConnection!
+}
+
+input RegisterInput {
+  displayName: String
+  email: String!
+  password: String!
+  username: String!
+}
+
+input SearchFilters {
+  category: String
+  genre: String
+}
+
+type SearchResult {
+  playlists: PlaylistConnection!
+  users: UserConnection!
+}
+
+enum TimeRange {
+  ALL_TIME
+  DAY
+  MONTH
+  WEEK
+}
+
+type Track {
+  album: String
+  artist: String!
+  coverImageUrl: String
+  duration: Int!
+  externalUrl: String
+  id: ID!
+  position: Int!
+  title: String!
+}
+
+input TrackInput {
+  album: String
+  artist: String!
+  coverImageUrl: String
+  duration: Int!
+  externalUrl: String
+  title: String!
+}
+
+input UpdatePlaylistInput {
+  coverImageUrl: String
+  description: String
+  genre: String
+  title: String
+  visibility: PlaylistVisibility
+}
+
+type User {
+  avatarUrl: String
+  bio: String
+  createdAt: DateTime!
+  displayName: String
+  email: String!
+  followerCount: Int!
+  followingCount: Int!
+  id: ID!
+  playlistCount: Int!
+  playlists: [Playlist!]!
+  updatedAt: DateTime!
+  username: String!
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}

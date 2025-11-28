@@ -1,4 +1,5 @@
 @apollo/protobufjs
+@biomejs/biome
 @nestjs/core
 bcrypt
 unrs-resolver
