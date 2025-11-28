@@ -151,16 +151,16 @@
     - **Property 12: Feed Ordering**
     - **Validates: Requirements 4.5**
 
-- [ ] 11. 소셜 UI 구현 (Frontend)
-  - [ ] 11.1 사용자 프로필 화면 구현
+- [x] 11. 소셜 UI 구현 (Frontend)
+  - [x] 11.1 사용자 프로필 화면 구현
     - app/user/[id].tsx 생성
     - FollowButton 컴포넌트
     - _Requirements: 4.1, 4.2_
-  - [ ] 11.2 피드 화면 구현
+  - [x] 11.2 피드 화면 구현
     - app/(tabs)/feed.tsx 생성
     - 무한 스크롤 구현
     - _Requirements: 4.5_
-  - [ ] 11.3 좋아요 버튼 구현
+  - [x] 11.3 좋아요 버튼 구현
     - PlaylistCard에 좋아요 기능 추가
     - _Requirements: 4.3, 4.4_
 
