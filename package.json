@@ -1,0 +1,21 @@
+{
+  "name": "mixly-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "mixly",
+    "mixly-be",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:be\" \"npm run dev:app\"",
+    "dev:be": "npm run start:dev --workspace=mixly-be",
+    "dev:app": "npm run start --workspace=mixly",
+    "build": "moon run :build",
+    "test": "moon run :test",
+    "lint": "moon run :lint"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

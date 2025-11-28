@@ -2,13 +2,13 @@
 
 ## Phase 1: 프로젝트 구조 및 기본 설정
 
-- [ ] 1. 모노레포 구조 설정
-  - [ ] 1.1 루트 package.json 및 Moonrepo 설정 파일 생성
+- [x] 1. 모노레포 구조 설정
+  - [x] 1.1 루트 package.json 및 Moonrepo 설정 파일 생성
     - 루트 package.json에 workspaces 설정
     - .moon/workspace.yml 및 .moon/toolchain.yml 생성
     - concurrently 스크립트 설정
     - _Requirements: 7.1, 7.3, 7.4_
-  - [ ] 1.2 shared 폴더 구조 및 GraphQL 스키마 생성
+  - [x] 1.2 shared 폴더 구조 및 GraphQL 스키마 생성
     - shared/graphql/schema.graphql 파일 생성
     - shared/types/ TypeScript 타입 정의
     - shared/package.json 설정

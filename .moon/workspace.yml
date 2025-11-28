@@ -1,0 +1,18 @@
+# Moonrepo workspace configuration
+# https://moonrepo.dev/docs/config/workspace
+
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+
+# Projects in the monorepo
+projects:
+  - 'mixly'
+  - 'mixly-be'
+  - 'shared'
+
+# Version control settings
+vcs:
+  manager: 'git'
+  defaultBranch: 'main'
+
+# Telemetry
+telemetry: false
