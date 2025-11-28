@@ -125,26 +125,26 @@
     - 공개/비공개 설정
     - _Requirements: 2.1, 2.6, 3.1, 3.2_
 
-- [ ] 9. Checkpoint - 플레이리스트 기능 테스트
+- [x] 9. Checkpoint - 플레이리스트 기능 테스트
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Phase 4: 소셜 기능
 
-- [ ] 10. 소셜 모듈 구현 (Backend)
-  - [ ] 10.1 팔로우/언팔로우 기능 구현
+- [x] 10. 소셜 모듈 구현 (Backend)
+  - [x] 10.1 팔로우/언팔로우 기능 구현
     - follow, unfollow 메서드
     - getFollowers, getFollowing 메서드
     - _Requirements: 4.1, 4.2_
   - [ ]* 10.2 Property test: 팔로우/언팔로우 라운드트립
     - **Property 10: Follow/Unfollow Round-Trip**
     - **Validates: Requirements 4.1, 4.2**
-  - [ ] 10.3 좋아요 기능 구현
+  - [x] 10.3 좋아요 기능 구현
     - likePlaylist, unlikePlaylist 메서드
     - _Requirements: 4.3, 4.4_
   - [ ]* 10.4 Property test: 좋아요 카운트 불변성
     - **Property 11: Like Count Invariant**
     - **Validates: Requirements 4.3, 4.4**
-  - [ ] 10.5 피드 기능 구현
+  - [x] 10.5 피드 기능 구현
     - getFeed 메서드 (팔로우한 사용자의 플레이리스트)
     - _Requirements: 4.5_
   - [ ]* 10.6 Property test: 피드 정렬
