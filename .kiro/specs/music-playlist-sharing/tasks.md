@@ -193,15 +193,15 @@
     - **Property 16: Pagination Consistency**
     - **Validates: Requirements 5.4**
 
-- [ ] 14. 검색 UI 구현 (Frontend)
-  - [ ] 14.1 검색 화면 구현
+- [x] 14. 검색 UI 구현 (Frontend)
+  - [x] 14.1 검색 화면 구현
     - app/(tabs)/explore.tsx 수정
     - 검색 입력 및 결과 표시
     - _Requirements: 5.1_
-  - [ ] 14.2 트렌딩 섹션 구현
+  - [x] 14.2 트렌딩 섹션 구현
     - 트렌딩 플레이리스트 목록
     - _Requirements: 5.2_
-  - [ ] 14.3 필터 UI 구현
+  - [x] 14.3 필터 UI 구현
     - 장르/카테고리 필터
     - _Requirements: 5.3_
 

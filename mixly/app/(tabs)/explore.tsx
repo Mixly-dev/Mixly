@@ -1,112 +1,176 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useState, useCallback } from 'react';
+import { View, Text, TextInput, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { router } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { SEARCH_QUERY, TRENDING_QUERY } from '../../graphql/queries';
+import { PlaylistCard } from '../../components/playlist/PlaylistCard';
 
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+const styles = {
+  container: 'flex-1 bg-gray-50',
+  header: 'px-4 py-4',
+  title: 'text-2xl font-bold text-gray-800',
+  searchContainer: 'px-4 mb-4',
+  searchInputWrapper: 'flex-row items-center bg-gray-100 rounded-xl px-4',
+  searchIcon: 'mr-2',
+  searchInput: 'flex-1 py-3 text-gray-800',
+  clearButton: 'p-2',
+  sectionTitle: 'text-lg font-semibold text-gray-800 px-4 mb-3',
+  loadingContainer: 'flex-1 items-center justify-center',
+  emptyContainer: 'flex-1 items-center justify-center px-6',
+  emptyText: 'text-gray-500 text-center mt-4',
+  listContent: 'px-4 pb-4',
+  filterContainer: 'flex-row px-4 mb-4',
+  filterButton: 'px-4 py-2 rounded-full mr-2',
+  filterButtonActive: 'bg-primary-600',
+  filterButtonInactive: 'bg-gray-200',
+  filterTextActive: 'text-white font-medium',
+  filterTextInactive: 'text-gray-600',
+};
 
-export default function TabTwoScreen() {
+const GENRES = ['Pop', 'Rock', 'Hip-Hop', 'Jazz', 'Electronic', 'Classical'];
+
+export default function ExploreScreen() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+
+  const { data: trendingData, loading: trendingLoading } = useQuery(TRENDING_QUERY, {
+    variables: { timeRange: 'WEEK', pagination: { first: 10 } },
+  });
+
+  const [search, { data: searchData, loading: searchLoading }] = useLazyQuery(SEARCH_QUERY);
+
+  const handleSearch = useCallback((text: string) => {
+    setSearchQuery(text);
+    if (text.length >= 2) {
+      search({
+        variables: {
+          query: text,
+          filters: selectedGenre ? { genre: selectedGenre } : undefined,
+          pagination: { first: 20 },
+        },
+      });
+    }
+  }, [search, selectedGenre]);
+
+  const handleGenreFilter = (genre: string) => {
+    const newGenre = selectedGenre === genre ? null : genre;
+    setSelectedGenre(newGenre);
+    if (searchQuery.length >= 2) {
+      search({
+        variables: {
+          query: searchQuery,
+          filters: newGenre ? { genre: newGenre } : undefined,
+          pagination: { first: 20 },
+        },
+      });
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+  };
+
+  const isSearching = searchQuery.length >= 2;
+  const searchResults = searchData?.search?.playlists?.edges?.map((e: any) => e.node) || [];
+  const trendingPlaylists = trendingData?.trending?.edges?.map((e: any) => e.node) || [];
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <SafeAreaView className={styles.container}>
+      <View className={styles.header}>
+        <Text className={styles.title}>Explore</Text>
+      </View>
+
+      {/* Search Input */}
+      <View className={styles.searchContainer}>
+        <View className={styles.searchInputWrapper}>
+          <Ionicons name="search" size={20} color="#9CA3AF" />
+          <TextInput
+            className={styles.searchInput}
+            placeholder="Search playlists..."
+            placeholderTextColor="#9CA3AF"
+            value={searchQuery}
+            onChangeText={handleSearch}
+          />
+          {searchQuery.length > 0 && (
+            <TouchableOpacity className={styles.clearButton} onPress={clearSearch}>
+              <Ionicons name="close-circle" size={20} color="#9CA3AF" />
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+
+      {/* Genre Filters */}
+      <FlatList
+        horizontal
+        data={GENRES}
+        keyExtractor={(item) => item}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 16, marginBottom: 16 }}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            className={`${styles.filterButton} ${
+              selectedGenre === item ? styles.filterButtonActive : styles.filterButtonInactive
+            }`}
+            onPress={() => handleGenreFilter(item)}
+          >
+            <Text
+              className={
+                selectedGenre === item ? styles.filterTextActive : styles.filterTextInactive
+              }
+            >
+              {item}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
+
+      {/* Content */}
+      {searchLoading || trendingLoading ? (
+        <View className={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#0ea5e9" />
+        </View>
+      ) : isSearching ? (
+        <>
+          <Text className={styles.sectionTitle}>Search Results</Text>
+          {searchResults.length === 0 ? (
+            <View className={styles.emptyContainer}>
+              <Ionicons name="search-outline" size={60} color="#9CA3AF" />
+              <Text className={styles.emptyText}>No playlists found for "{searchQuery}"</Text>
+            </View>
+          ) : (
+            <FlatList
+              data={searchResults}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={{ paddingHorizontal: 16 }}
+              renderItem={({ item }) => (
+                <PlaylistCard
+                  playlist={item}
+                  onPress={() => router.push(`/playlist/${item.id}`)}
+                  showOwner
+                />
+              )}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          <Text className={styles.sectionTitle}>Trending This Week</Text>
+          <FlatList
+            data={trendingPlaylists}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ paddingHorizontal: 16 }}
+            renderItem={({ item }) => (
+              <PlaylistCard
+                playlist={item}
+                onPress={() => router.push(`/playlist/${item.id}`)}
+                showOwner
+              />
+            )}
+          />
+        </>
+      )}
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-});
