@@ -112,15 +112,15 @@
     - **Validates: Requirements 3.1, 3.2**
 
 - [ ] 8. 플레이리스트 UI 구현 (Frontend)
-  - [ ] 8.1 플레이리스트 목록 화면 구현
+  - [x] 8.1 플레이리스트 목록 화면 구현
     - app/(tabs)/index.tsx 수정 (내 플레이리스트)
     - PlaylistCard 컴포넌트
     - _Requirements: 2.1_
-  - [ ] 8.2 플레이리스트 상세 화면 구현
+  - [x] 8.2 플레이리스트 상세 화면 구현
     - app/playlist/[id].tsx 생성
     - TrackList 컴포넌트
     - _Requirements: 2.2, 2.3, 2.4_
-  - [ ] 8.3 플레이리스트 생성/편집 모달 구현
+  - [x] 8.3 플레이리스트 생성/편집 모달 구현
     - 제목, 설명, 커버 이미지 입력
     - 공개/비공개 설정
     - _Requirements: 2.1, 2.6, 3.1, 3.2_

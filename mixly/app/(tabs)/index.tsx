@@ -1,98 +1,94 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useQuery } from '@apollo/client';
+import { router } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MY_PLAYLISTS_QUERY } from '../../graphql/queries';
+import { PlaylistCard } from '../../components/playlist/PlaylistCard';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
+  
+  const { data, loading, refetch } = useQuery(MY_PLAYLISTS_QUERY, {
+    skip: !isAuthenticated,
+    variables: { pagination: { first: 20 } },
+  });
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  if (authLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-gray-50">
+        <ActivityIndicator size="large" color="#0ea5e9" />
+      </View>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <SafeAreaView className="flex-1 bg-gray-50">
+        <View className="flex-1 items-center justify-center px-6">
+          <Ionicons name="musical-notes" size={80} color="#0ea5e9" />
+          <Text className="text-2xl font-bold text-gray-800 mt-6">Welcome to Mixly</Text>
+          <Text className="text-gray-500 text-center mt-2">
+            Sign in to create and share your playlists
+          </Text>
+          <TouchableOpacity
+            className="bg-primary-600 px-8 py-4 rounded-full mt-8"
+            onPress={() => router.push('/(auth)/login')}
+          >
+            <Text className="text-white font-semibold text-lg">Get Started</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  const playlists = data?.myPlaylists?.edges?.map((edge: any) => edge.node) || [];
+
+  return (
+    <SafeAreaView className="flex-1 bg-gray-50">
+      <View className="flex-row items-center justify-between px-4 py-4">
+        <Text className="text-2xl font-bold text-gray-800">My Playlists</Text>
+        <TouchableOpacity
+          className="bg-primary-600 w-10 h-10 rounded-full items-center justify-center"
+          onPress={() => router.push('/modal')}
+        >
+          <Ionicons name="add" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+
+      {loading ? (
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="large" color="#0ea5e9" />
+        </View>
+      ) : playlists.length === 0 ? (
+        <View className="flex-1 items-center justify-center px-6">
+          <Ionicons name="disc-outline" size={60} color="#9CA3AF" />
+          <Text className="text-gray-500 text-center mt-4">
+            You haven't created any playlists yet
+          </Text>
+          <TouchableOpacity
+            className="bg-primary-600 px-6 py-3 rounded-full mt-6"
+            onPress={() => router.push('/modal')}
+          >
+            <Text className="text-white font-semibold">Create Playlist</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <FlatList
+          data={playlists}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{ padding: 16 }}
+          renderItem={({ item }) => (
+            <PlaylistCard
+              playlist={item}
+              onPress={() => router.push(`/playlist/${item.id}`)}
+            />
+          )}
+          onRefresh={refetch}
+          refreshing={loading}
+        />
+      )}
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
