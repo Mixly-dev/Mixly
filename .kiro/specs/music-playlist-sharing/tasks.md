@@ -40,12 +40,12 @@
 
 ## Phase 2: 인증 시스템
 
-- [ ] 4. 인증 모듈 구현 (Backend)
-  - [ ] 4.1 Auth 모듈 및 서비스 생성
+- [x] 4. 인증 모듈 구현 (Backend)
+  - [x] 4.1 Auth 모듈 및 서비스 생성
     - JWT 토큰 생성/검증 로직
     - 비밀번호 해싱 (bcrypt)
     - _Requirements: 1.1, 1.2_
-  - [ ] 4.2 회원가입 및 로그인 리졸버 구현
+  - [x] 4.2 회원가입 및 로그인 리졸버 구현
     - register mutation 구현
     - login mutation 구현
     - refreshToken mutation 구현
