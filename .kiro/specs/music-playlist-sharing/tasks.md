@@ -219,5 +219,5 @@
     - **Property 18: Malformed Input Rejection**
     - **Validates: Requirements 6.4**
 
-- [ ] 17. Final Checkpoint - 전체 테스트
+- [x] 17. Final Checkpoint - 전체 테스트
   - Ensure all tests pass, ask the user if questions arise.
