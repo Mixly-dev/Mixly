@@ -2,9 +2,3 @@ packages:
   - 'mixly'
   - 'mixly-be'
   - 'shared'
-
-onlyBuiltDependencies:
-  - '@apollo/protobufjs'
-  - '@nestjs/core'
-  - 'bcrypt'
-  - 'unrs-resolver'
